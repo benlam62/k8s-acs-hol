@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
       - name: azure-vote-front
-        image: microsoft/azure-vote-front:redis-v1
+        image: benlamregistry1.azurecr.io/azure-vote-front:redis-v1
         ports:
         - containerPort: 80
         resources:
@@ -55,6 +55,8 @@ spec:
         env:
         - name: REDIS
           value: "azure-vote-back"
+      imagePullSecrets:
+      - name: myregistrykey
 ---
 apiVersion: v1
 kind: Service
