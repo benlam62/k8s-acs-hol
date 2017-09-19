@@ -11,7 +11,7 @@ node {
   }
   
   stage('build') {
-    sh 'cd ./calculator-api && mvn clean package'
+    sh 'cd ./calculator-api && mvn clean package && cd ..'
   }
   
   stage('deploy') {
