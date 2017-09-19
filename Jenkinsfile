@@ -11,10 +11,11 @@ node {
   }
   
   stage('build') {
-    sh 'cd ./calculator-api && mvn clean package && cd ..'
+    sh 'cd ./calculator-api && mvn clean package'
   }
   
   stage('deploy') {
+    // test
     def webAppResourceGroup = 'linux-webapp'
     def webAppName = 'benlam-linux1'
     def acrName = 'benlamRegistry1'
