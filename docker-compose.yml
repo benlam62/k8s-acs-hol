@@ -14,3 +14,10 @@ services:
       REDIS: azure-vote-back
     ports:
         - "8080:80"
+
+  azure-calculator-api:
+    build: ./calculator-api
+    image: azure-calculator-api
+    container_name: azure-calculator-api
+    ports:
+        - "9090:8080"
