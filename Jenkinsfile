@@ -1,10 +1,11 @@
 import groovy.json.JsonSlurper
+def getAcrLoginServer(def acrSettingsJson) {
+  def acrSettings = new JsonSlurper().parseText(acrSettingsJson)
+  return acrSettings.loginServer
+}
+
 pipeline{
 node{
-  def getAcrLoginServer(def acrSettingsJson) {
-    def acrSettings = new JsonSlurper().parseText(acrSettingsJson)
-    return acrSettings.loginServer
-  }
   stages{
   stage('init') {
     checkout scm
