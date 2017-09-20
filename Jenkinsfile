@@ -18,9 +18,9 @@ node {
     def webAppResourceGroup = 'linux-webapp'
     def webAppName = 'benlam-linux1'
     def acrName = 'benlamRegistry1'
-    def imageName = 'calculator'
-    def k8sDeploymentName = 'deployments/azure-calculator-api'
-    def k8sPodName = 'azure-calculator-api'
+    def calculatorImageName = 'calculator'
+    def calculatorDeploymentName = 'deployments/azure-calculator-api'
+    def calculatorPodName = 'azure-calculator-api'
     // generate version, it's important to remove the trailing new line in git describe output
     def version = sh script: 'git describe | tr -d "\n"', returnStdout: true
     withCredentials([azureServicePrincipal('e522eb25-3612-45b8-8248-586fe2e3eefe')]) {
@@ -38,14 +38,14 @@ node {
       sh "whoami"
       sh "docker login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET $loginServer"
       // build image
-      def imageWithTag = "$loginServer/$imageName:$version"
-      def image = docker.build ("$imageWithTag", "-f calculator-api/Dockerfile calculator-api")
+      def calculatorImageWithTag = "$loginServer/$calculatorImageName:$version"
+      def calculatorImage = docker.build ("$calculatorImageWithTag", "-f calculator-api/Dockerfile calculator-api")
       // push image
-      image.push()
+      calculatorImage.push()
       // update web app docker settings
       //sh "az webapp config container set -g $webAppResourceGroup -n $webAppName -c $imageWithTag -r http://$loginServer -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET"
       // update K8s cluster
-      sh "kubectl set image $k8sDeploymentName $k8sPodName=$imageWithTag"
+      sh "kubectl set image $calculatorDeploymentName $calculatorPodName=$calculatorImageWithTag"
       // log out
       sh 'az logout'
       sh "docker logout $loginServer"
