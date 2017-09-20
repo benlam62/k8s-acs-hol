@@ -41,12 +41,17 @@ node {
       sh "whoami"
       sh "docker login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET $loginServer"
       // build images
-      def calculatorImageWithTag = "$loginServer/$calculatorImageName:$version"
       agent { dockerfile { dir 'calculator-api' } }
-      def calculatorImage = docker.build calculatorImageWithTag
-      def voteFrontImageWithTag = "$loginServer/$voteFrontImageName:$version"
+      steps {
+        def calculatorImageWithTag = "$loginServer/$calculatorImageName:$version"
+        def calculatorImage = docker.build calculatorImageWithTag
+
+      }
       agent { dockerfile { dir 'azure-vote' } }
-      def voteFrontImage = docker.build voteFrontImageWithTag
+      steps {
+        def voteFrontImageWithTag = "$loginServer/$voteFrontImageName:$version"
+        def voteFrontImage = docker.build voteFrontImageWithTag
+      }
       // push images
       calculaterImage.push()
       voteFrontImage.push()
