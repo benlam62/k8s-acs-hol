@@ -42,10 +42,10 @@ node {
       sh "docker login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET $loginServer"
       // build images
       def calculatorImageWithTag = "$loginServer/$calculatorImageName:$version"
-      sh 'cd calculator-api'
+      agent { dockerfile { dir 'calculator-api' } }
       def calculatorImage = docker.build calculatorImageWithTag
       def voteFrontImageWithTag = "$loginServer/$voteFrontImageName:$version"
-      sh 'cd ../azure-vote'
+      agent { dockerfile { dir 'azure-vote' }
       def voteFrontImage = docker.build voteFrontImageWithTag
       // push images
       calculaterImage.push()
