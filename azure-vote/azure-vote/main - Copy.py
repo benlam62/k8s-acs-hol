@@ -63,15 +63,9 @@ def index():
             # Get current values
             vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')  
-
-	    resp = requests.get('http://52.229.173.104:8080/api/calculator/add?x=1&y=2')
-	    if resp.status_code != 200:
-	    	# This means something went wrong.
-    		raise ApiError('GET /api/calculator/add {}'.format(resp.status_code))
-	    result = resp.json()["result"]            
-    
+                
             # Return results
-            return render_template("index.html", topvote=int(result), value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
+            return render_template("index.html", value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
 if __name__ == "__main__":
     app.run()
