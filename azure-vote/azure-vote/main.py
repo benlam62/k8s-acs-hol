@@ -65,7 +65,7 @@ def index():
             vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')  
 
-	    resp = requests.get('http://52.229.173.104:8080/api/calculator/add?x=1&y=2')
+	    resp = requests.get('http://52.229.173.104:8080/api/calculator/add?x=' + vote1 + '&y=' + vote2)
 	    if resp.status_code != 200:
 	    	# This means something went wrong.
     		raise ApiError('GET /api/calculator/add {}'.format(resp.status_code))
