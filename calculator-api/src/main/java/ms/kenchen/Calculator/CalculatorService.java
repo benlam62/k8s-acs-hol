@@ -6,6 +6,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import java.util.Date;
+import java.lang.Math;
 
 @Path("/calculator")
 public class CalculatorService {
@@ -48,6 +49,6 @@ public class CalculatorService {
     @Path("max")
     @Produces(MediaType.APPLICATION_JSON)
     public CalculatorResponse Max(@QueryParam("x") int x, @QueryParam("y") int y) {
-        return new CalculatorResponse(x, y, max(x, y));
+        return new CalculatorResponse(x, y, Math.max(x, y));
     }
 }
