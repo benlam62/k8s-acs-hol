@@ -1,7 +1,6 @@
+import groovy.json.JsonSlurper
 pipeline{
 node{
-  import groovy.json.JsonSlurper
-
   def getAcrLoginServer(def acrSettingsJson) {
     def acrSettings = new JsonSlurper().parseText(acrSettingsJson)
     return acrSettings.loginServer
