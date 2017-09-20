@@ -39,7 +39,7 @@ node {
       sh "docker login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET $loginServer"
       // build image
       def imageWithTag = "$loginServer/$imageName:$version"
-      def image = docker.build ("$imageWithTag", "-f calculator-api/Dockerfile .")
+      def image = docker.build ("$imageWithTag", "-f calculator-api/Dockerfile calculator-api")
       // push image
       image.push()
       // update web app docker settings
