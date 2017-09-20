@@ -1,11 +1,11 @@
 import groovy.json.JsonSlurper
 
-def getAcrLoginServer(def acrSettingsJson) {
-  def acrSettings = new JsonSlurper().parseText(acrSettingsJson)
-  return acrSettings.loginServer
-}
-
 node {
+  def getAcrLoginServer(def acrSettingsJson) {
+    def acrSettings = new JsonSlurper().parseText(acrSettingsJson)
+    return acrSettings.loginServer
+  }
+  stages{
   stage('init') {
     checkout scm
   }
@@ -56,5 +56,6 @@ node {
         sh "docker logout $loginServer"
       }
     }
+  }
   }
 }
