@@ -13,7 +13,7 @@ node {
   stage('build') {
     sh 'cd ./calculator-api && mvn clean package'
   }
-  
+
   stage('deploy') {
     def webAppResourceGroup = 'linux-webapp'
     def webAppName = 'benlam-linux1'
@@ -34,7 +34,9 @@ node {
       '''
       // get login server
       def acrSettingsJson = sh script: "az acr show -n $acrName", returnStdout: true
-      def loginServer = getAcrLoginServer acrSettingsJson
+      def loginServer = getAcrLoginServer acrSettingsJson 
+      sh 'az logout'
+    }
       // login docker
       // docker.withRegistry only supports credential ID, so use native docker command to login
       // you can also use docker.withRegistry if you add a credential
@@ -61,8 +63,6 @@ node {
       sh "kubectl set image $calculatorDeploymentName $calculatorPodName=$calculatorImageWithTag"
       sh "kubectl set image $voteFrontDeploymentName $voteFrontPodName=$voteFrontImageWithTag"
       // log out
-      sh 'az logout'
       sh "docker logout $loginServer"
-    }
   }
 }
