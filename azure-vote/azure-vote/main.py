@@ -13,6 +13,7 @@ app.config.from_pyfile('config_file.cfg')
 button1 =       app.config['VOTE1VALUE']  
 button2 =       app.config['VOTE2VALUE']
 title =         app.config['TITLE']
+choice = ''
 
 # Redis configurations
 redis_server = os.environ['REDIS']
