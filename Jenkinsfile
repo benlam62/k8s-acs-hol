@@ -45,7 +45,7 @@ node {
       agent { dockerfile { dir 'calculator-api' } }
       def calculatorImage = docker.build calculatorImageWithTag
       def voteFrontImageWithTag = "$loginServer/$voteFrontImageName:$version"
-      agent { dockerfile { dir 'azure-vote' }
+      agent { dockerfile { dir 'azure-vote' } }
       def voteFrontImage = docker.build voteFrontImageWithTag
       // push images
       calculaterImage.push()
