@@ -63,16 +63,22 @@ def index():
             
             # Get current values
             vote1 = r.get(button1).decode('utf-8')
-            vote2 = r.get(button2).decode('utf-8')  
-
+            vote2 = r.get(button2).decode('utf-8')
+  
+	    # Get the top vote	
 	    resp = requests.get('http://52.229.173.104:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
 	    if resp.status_code != 200:
 	    	# This means something went wrong.
     		raise ApiError('GET /api/calculator/max {}'.format(resp.status_code))
-	    result = resp.json()["result"]            
+	    result = resp.json()["result"]
+
+	    if result == vote1:
+		  choice = button1
+	    else
+		  choice = button2            
     
             # Return results
-            return render_template("index.html", topvote=int(result), value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
+            return render_template("index.html", topvote=choice, value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
 if __name__ == "__main__":
     app.run()
