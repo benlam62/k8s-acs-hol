@@ -4,6 +4,7 @@ import random
 import redis
 import socket
 import sys
+import requests
 
 app = Flask(__name__)
 
