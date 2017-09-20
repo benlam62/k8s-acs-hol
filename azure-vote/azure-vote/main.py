@@ -13,7 +13,7 @@ app.config.from_pyfile('config_file.cfg')
 button1 =       app.config['VOTE1VALUE']  
 button2 =       app.config['VOTE2VALUE']
 title =         app.config['TITLE']
-choice = ''
+topchoice = ''
 
 # Redis configurations
 redis_server = os.environ['REDIS']
@@ -74,12 +74,12 @@ def index():
 	    result = resp.json()["result"]
 
 	    if result == vote1:
-		  choice = button1
+		  topchoice = button1
 	    else
-		  choice = button2            
+		  topchoice = button2            
     
             # Return results
-            return render_template("index.html", topvote=choice, value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
+            return render_template("index.html", topvote=topchoice, value1=int(vote1), value2=int(vote2), button1=button1, button2=button2, title=title)
 
 if __name__ == "__main__":
     app.run()
