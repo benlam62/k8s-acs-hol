@@ -2,7 +2,9 @@ pipeline{
     agent any
     stages{
       stage('init') {
-        checkout scm
+        step {
+          checkout scm
+        }  
       }
       stage('Build image') {
         agent { dockerfile { dir 'calculator-api' } }
