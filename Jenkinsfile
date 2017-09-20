@@ -4,7 +4,7 @@ def getAcrLoginServer(def acrSettingsJson) {
   def acrSettings = new JsonSlurper().parseText(acrSettingsJson)
   return acrSettings.loginServer
 }
-
+pipeline{
 node {
   stages{
   stage('init') {
@@ -59,4 +59,5 @@ node {
     }
   }
   }
+}
 }
