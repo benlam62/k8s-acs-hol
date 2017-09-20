@@ -43,11 +43,4 @@ public class CalculatorService {
     public CalculatorResponse Div(@QueryParam("x") int x, @QueryParam("y") int y) {
         return new CalculatorResponse(x, y, x / y);
     }
-
-    @GET
-    @Path("max")
-    @Produces(MediaType.APPLICATION_JSON)
-    public CalculatorResponse Max(@QueryParam("x") int x, @QueryParam("y") int y) {
-        return new CalculatorResponse(x, y, max(x, y));
-    }
 }
