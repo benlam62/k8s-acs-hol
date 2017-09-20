@@ -23,6 +23,7 @@ pipeline{
       stage('Build image') {
         agent { dockerfile { dir 'calculator-api' } }
         steps {
+	  script {
 	  def webAppResourceGroup = 'linux-webapp'
 	  def webAppName = 'benlam-linux1'
 	  def acrName = 'benlamRegistry1'
@@ -60,6 +61,7 @@ pipeline{
             // log out
             sh 'az logout'
             sh "docker logout $loginServer"
+	    }
 	  }
         }
       }
