@@ -74,7 +74,7 @@ def index():
 
 	    if int(result) == int(vote1):
 		  topvote = button1
-	    else
+	    else:
 		  topvote = button2            
     
             # Return results
