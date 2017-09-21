@@ -10,7 +10,7 @@ node {
     checkout scm
   }
   
-  stage('build') {
+  stage('build & test') {
     sh 'cd ./calculator-api && mvn clean package'
   }
   
@@ -41,10 +41,10 @@ node {
       sh "whoami"
       sh "docker login -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET $loginServer"
       // build image
-      def calculatorImageWithTag = "$loginServer/$calculatorImageName:$version"
-      def calculatorImage = docker.build ("$calculatorImageWithTag", "-f calculator-api/Dockerfile calculator-api")
+      //def calculatorImageWithTag = "$loginServer/$calculatorImageName:$version"
+      //def calculatorImage = docker.build ("$calculatorImageWithTag", "-f calculator-api/Dockerfile calculator-api")
       // push image
-      calculatorImage.push()
+      //calculatorImage.push()
       def voteFrontImageWithTag = "$loginServer/$voteFrontImageName:$version"
       def voteFrontImage = docker.build ("$voteFrontImageWithTag", "-f azure-vote/Dockerfile azure-vote")
       // push image
@@ -52,7 +52,7 @@ node {
       // update web app docker settings
       //sh "az webapp config container set -g $webAppResourceGroup -n $webAppName -c $imageWithTag -r http://$loginServer -u $AZURE_CLIENT_ID -p $AZURE_CLIENT_SECRET"
       // update K8s cluster
-      sh "kubectl set image $calculatorDeploymentName $calculatorPodName=$calculatorImageWithTag"
+      //sh "kubectl set image $calculatorDeploymentName $calculatorPodName=$calculatorImageWithTag"
       sh "kubectl set image $voteFrontDeploymentName $voteFrontPodName=$voteFrontImageWithTag"
       // log out
       sh 'az logout'
