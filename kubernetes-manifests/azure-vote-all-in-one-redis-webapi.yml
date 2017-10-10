@@ -44,7 +44,7 @@ spec:
     spec:
       containers:
       - name: azure-vote-front
-        image: benlamregistry1.azurecr.io/azure-vote-front:33
+        image: benlamregistry1.azurecr.io/azure-vote-front:jenkins-Vote_App_Python_FE-ACS-46
         ports:
         - containerPort: 80
         resources:
@@ -86,7 +86,7 @@ spec:
     spec:
       containers:
       - name: azure-calculator-api
-        image: benlamregistry1.azurecr.io/calculator:v1.0-40-g7364434
+        image: benlamregistry1.azurecr.io/calculator:v1.0-58-g8af492b
         ports:
         - containerPort: 8080
         resources:
