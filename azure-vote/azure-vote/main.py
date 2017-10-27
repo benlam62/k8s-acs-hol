@@ -69,8 +69,8 @@ def index():
 	    # Get the top vote
             # http://azure-calculator-api:8080 for local docker testing
             # http://azure-calculator-api.default:8080 for K8S
-            #resp = requests.get('http://azure-calculator-api:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
-	    resp = requests.get('http://azure-calculator-api.default:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
+            resp = requests.get('http://azure-calculator-api:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
+	    #resp = requests.get('http://azure-calculator-api.default:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
 	    if resp.status_code != 200:
 	    	# This means something went wrong.
     		raise ApiError('GET /api/calculator/max {}'.format(resp.status_code))
