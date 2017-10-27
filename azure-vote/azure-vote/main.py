@@ -16,7 +16,6 @@ title =         app.config['TITLE']
 
 # Redis configurations
 redis_server = os.environ['REDIS']
-title=redis_server
 
 # Redis Connection
 try:
