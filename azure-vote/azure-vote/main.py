@@ -16,6 +16,7 @@ title =         app.config['TITLE']
 
 # Redis configurations
 redis_server = os.environ['REDIS']
+title=redis_server
 
 # Redis Connection
 try:
@@ -65,9 +66,11 @@ def index():
             vote1 = r.get(button1).decode('utf-8')
             vote2 = r.get(button2).decode('utf-8')
   
-	    # Get the top vote	
-	    #resp = requests.get('http://13.75.112.123:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
-            resp = requests.get('http://azure-calculator-api.default:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
+	    # Get the top vote
+            # http://azure-calculator-api:8080 for local docker testing
+            # http://azure-calculator-api.default:8080 for K8S
+            #resp = requests.get('http://azure-calculator-api:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
+	    resp = requests.get('http://azure-calculator-api.default:8080/api/calculator/max?x=' + vote1 + '&y=' + vote2)
 	    if resp.status_code != 200:
 	    	# This means something went wrong.
     		raise ApiError('GET /api/calculator/max {}'.format(resp.status_code))
