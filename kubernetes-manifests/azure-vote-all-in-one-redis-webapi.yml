@@ -68,6 +68,7 @@ spec:
   - port: 80
   selector:
     app: azure-vote-front
+---
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
